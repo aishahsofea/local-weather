@@ -17,7 +17,7 @@ if ("geolocation" in navigator) {
             console.log(data);
 
             let temp = data.main.temp;
-            let celcius = temp - 273.15;
+            let celcius = Math.floor(temp - 273.15);
             let fahrenheit = (Math.floor(temp * (9/5) - 459.67));
 
             $temp.addEventListener("click", _ => {
