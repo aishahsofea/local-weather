@@ -41,11 +41,23 @@ if ("geolocation" in navigator) {
 } else {
     console.log("geolocation not available")
 }
-let date = new Date();
-let hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
-let min = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
-$time.innerHTML = `${hour}:${min}`;
 
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-$date.innerHTML = `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+const time = _ => {
+    let date = new Date();
+    let hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
+    let min = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+    let ampm = hour > 11 ? "PM" : "AM";
+    if (hour == 0) {
+        hour = 12;
+    } else if (hour > 12) {
+        hour = hour - 12
+    }
+    $time.innerHTML = `${hour}:${min} ${ampm}`;
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    $date.innerHTML = `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+    setTimeout(time, 1000)
+}
+time();
+
+
